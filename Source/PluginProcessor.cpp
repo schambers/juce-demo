@@ -132,8 +132,6 @@ void JucedemoAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juc
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
-
-    rawVolume = 0.015f;
     
     // In case we have more outputs than inputs, this code clears any output
     // channels that didn't contain input data, (because these aren't
@@ -157,7 +155,7 @@ void JucedemoAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juc
         // Just pipe the input data to output
         for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
         {
-            channelData[sample] = rawVolume * buffer.getSample(channel, sample);
+            channelData[sample] = gain * buffer.getSample(channel, sample);
         }
     }
 }
