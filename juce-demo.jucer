@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="QAuHoN" name="juce-demo" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
+              pluginCharacteristicsValue="pluginWantsMidiIn" bundleIdentifier="dkoded-beats"
+              version="0.0.1" pluginManufacturer="dkoded-beats" aaxIdentifier="com.dkoded-beats.jucedemo">
   <MAINGROUP id="WnUnsw" name="juce-demo">
     <GROUP id="{EC0626FB-58C6-F889-77FC-D1509041F5CC}" name="Source">
       <FILE id="N9kUxU" name="PluginProcessor.cpp" compile="1" resource="0"
@@ -35,6 +37,22 @@
         <MODULEPATH id="juce_gui_extra" path="../JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
+    <CLION targetFolder="Builds/CLion" clionXcodeEnabled="1">
+      <MODULEPATHS>
+        <MODULEPATH id="juce_gui_extra"/>
+        <MODULEPATH id="juce_gui_basics"/>
+        <MODULEPATH id="juce_graphics"/>
+        <MODULEPATH id="juce_events"/>
+        <MODULEPATH id="juce_data_structures"/>
+        <MODULEPATH id="juce_core"/>
+        <MODULEPATH id="juce_audio_utils"/>
+        <MODULEPATH id="juce_audio_processors"/>
+        <MODULEPATH id="juce_audio_plugin_client"/>
+        <MODULEPATH id="juce_audio_formats"/>
+        <MODULEPATH id="juce_audio_devices"/>
+        <MODULEPATH id="juce_audio_basics"/>
+      </MODULEPATHS>
+    </CLION>
   </EXPORTFORMATS>
   <MODULES>
     <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
@@ -51,4 +69,7 @@
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
   </MODULES>
+  <LIVE_SETTINGS>
+    <OSX/>
+  </LIVE_SETTINGS>
 </JUCERPROJECT>
