@@ -33,7 +33,6 @@ private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (JucedemoAudioProcessorEditor)
     
     juce::Slider gainSlider;
-    juce::Label gainLabel;
 
     void sliderValueChanged (juce::Slider* slider) override;
 };

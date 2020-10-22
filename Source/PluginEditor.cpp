@@ -15,18 +15,14 @@ JucedemoAudioProcessorEditor::JucedemoAudioProcessorEditor (JucedemoAudioProcess
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (400, 300);
+    setSize (200, 400);
     
-    addAndMakeVisible (gainSlider);
-    gainSlider.setRange (0.0, 1);
-    gainSlider.setTextValueSuffix (" db");
-    gainSlider.setSkewFactorFromMidPoint (0.5);
-    gainSlider.setValue (0.0);
-    gainSlider.addListener (this);
-    
-    addAndMakeVisible (gainLabel);
-    gainLabel.setText ("Gain", juce::dontSendNotification);
-    gainLabel.attachToComponent (&gainSlider, true);
+    gainSlider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
+    gainSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 100, 25);
+    gainSlider.setRange(-48.0, 0.0);
+    gainSlider.setValue(-1.0);
+    gainSlider.addListener(this);
+    addAndMakeVisible(gainSlider);
 }
 
 JucedemoAudioProcessorEditor::~JucedemoAudioProcessorEditor()
@@ -38,21 +34,20 @@ void JucedemoAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-
-    g.setColour (juce::Colours::limegreen);
-    g.setOpacity (0.50f);
-    g.setFont (18.0f);
-    g.drawFittedText ("dkodedbeats.com Plug-In!", getLocalBounds(), juce::Justification::centred, 1);
-
 }
 
 void JucedemoAudioProcessorEditor::resized()
 {
-    auto sliderLeft = 120;
-    gainSlider.setBounds (sliderLeft, 20, getWidth() - sliderLeft - 10, 20);
+    gainSlider.setBounds(getLocalBounds());
 }
 
 void JucedemoAudioProcessorEditor::sliderValueChanged (juce::Slider* slider)
 {
-    audioProcessor.gain = gainSlider.getValue();
+    if (slider == &gainSlider)
+    {
+        audioProcessor.rawVolume = juce::Decibels::decibelsToGain((float)gainSlider.getValue());
+        
+        // Calculates the gain via raising to power of 10 and dividing by 20
+        // audioProcessor.rawVolume = pow(10, gainSlider.getValue() / 20);
+    }
 }
